@@ -1,0 +1,31 @@
+<launch>
+  <node name="velocity_ramp"
+         pkg="mobile_platform"
+        type="velocity_ramp" />
+
+  <node name="motor_driver_interface"
+         pkg="mobile_platform"
+        type="motor_driver_interface" />
+
+  <node name="server_wifi"
+        pkg="server_wifi"
+        type="server_wifi" 
+        args="2000"/>
+
+  <node name="bt_server"
+        pkg="bluetooth_server"
+        type="btserver" />
+
+  <node name="velocity_cmd_switch"
+        pkg="mobile_platform"
+        type="velocity_cmd_switch" />
+
+  <node name="keyboard_publisher"
+         pkg="mobile_platform"
+        type="keyboard_publisher" />
+
+  <node name="command_publisher"
+        pkg="mobile_platform"
+        type="command_publisher" />
+</launch>
+

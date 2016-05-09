@@ -1,0 +1,32 @@
+digraph G {
+node [shape=box];
+"base_link" [label="base_link"];
+"drive_compartment" [label="drive_compartment"];
+"left_back_wheel" [label="left_back_wheel"];
+"left_front_wheel" [label="left_front_wheel"];
+"right_back_wheel" [label="right_back_wheel"];
+"right_front_wheel" [label="right_front_wheel"];
+"manipulator_arm_dummy" [label="manipulator_arm_dummy"];
+"rear_compartment" [label="rear_compartment"];
+"openni_link" [label="openni_link"];
+"laser" [label="laser"];
+node [shape=ellipse, color=blue, fontcolor=blue];
+"base_link" -> "base_to_drive_compartment" [label="xyz: 0 0 -0.0025 \nrpy: 0 -0 0"]
+"base_to_drive_compartment" -> "drive_compartment"
+"drive_compartment" -> "left_back_wheel_joint" [label="xyz: -0.18 0.2225 -0.0275 \nrpy: 0 -0 0"]
+"left_back_wheel_joint" -> "left_back_wheel"
+"drive_compartment" -> "left_front_wheel_joint" [label="xyz: 0.18 0.2225 -0.0275 \nrpy: 0 -0 0"]
+"left_front_wheel_joint" -> "left_front_wheel"
+"drive_compartment" -> "right_back_wheel_joint" [label="xyz: -0.18 -0.2225 -0.0275 \nrpy: 0 -0 0"]
+"right_back_wheel_joint" -> "right_back_wheel"
+"drive_compartment" -> "right_front_wheel_joint" [label="xyz: 0.18 -0.2225 -0.0275 \nrpy: 0 -0 0"]
+"right_front_wheel_joint" -> "right_front_wheel"
+"base_link" -> "base_to_manipulator_arm_dummy" [label="xyz: 0.21 0 0.005 \nrpy: 0 -0 0"]
+"base_to_manipulator_arm_dummy" -> "manipulator_arm_dummy"
+"base_link" -> "base_to_rear_compartment" [label="xyz: -0.225 0 0.205 \nrpy: 0 -0 0"]
+"base_to_rear_compartment" -> "rear_compartment"
+"base_link" -> "camera_frame_joint" [label="xyz: 0.39 0.03 0.125 \nrpy: 0 -0 0.02"]
+"camera_frame_joint" -> "openni_link"
+"base_link" -> "laser_joint" [label="xyz: 0.36 0 0.0375 \nrpy: 0 -0 0"]
+"laser_joint" -> "laser"
+}

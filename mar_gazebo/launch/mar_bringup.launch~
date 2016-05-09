@@ -1,0 +1,64 @@
+<!-- Hector SLAM launch based on:  -->
+<!-- https://github.com/introlab/rtabmap_ros/blob/master/launch/demo/demo_hector_mapping.launch -->
+
+<launch>
+  
+  <!-- ******************************* -->
+  <!-- ******  SIMULATOR LAUNCH ****** -->
+  <!-- ******************************* -->
+
+  <node pkg="tf" type="static_transform_publisher" name="scanmatcher_to_base_link" 
+    args="0.0 0.0 0.0 0.0 0.0 0.0 /scanmatcher_frame /base_link 100" />
+
+  <param name="robot_description" command="cat $(find mar_description)/urdf/mar_model_sim.urdf" />
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+
+  <node name="keyboard_publisher"
+         pkg="mobile_platform"
+        type="keyboard_publisher" />
+
+  <node name="command_publisher"
+         pkg="mobile_platform"
+        type="command_publisher" />
+
+  <node name="velocity_cmd_switch"
+         pkg="mobile_platform"
+        type="velocity_cmd_switch" />
+
+  <node name="velocity_ramp"
+         pkg="mobile_platform"
+        type="velocity_ramp" />
+
+  <node name="btserver"
+         pkg="bluetooth_server"
+        type="btserver" />
+
+  <node name="server_wifi"
+         pkg="server_wifi"
+        type="server_wifi"
+        args="2000" />
+
+
+  <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find mar_gazebo)/worlds/asphalt.world"/>
+    <!-- more default parameters can be changed here -->
+  </include>
+
+  <!-- Spawn a robot into Gazebo -->
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-file $(find mar_description)/urdf/mar_model_sim.urdf -urdf -z 1 -model mar_model_sim" />
+
+  <param name="use_sim_time" type="bool" value="True"/>
+
+
+<node name="foo_throttler" type="throttle" pkg="topic_tools" args="messages /camera/rgb/image_raw 10 /image_raw_throttled" 
+/>
+
+<node pkg="web_video_server"
+     name="web_video_server"
+     type="web_video_server"
+     args="http://192.168.0.110:8080/stream?topic=/image_raw_throttled&amp;quality=50&amp;width=320&amp;height=240">
+</node>
+
+</launch>

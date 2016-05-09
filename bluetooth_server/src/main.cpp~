@@ -1,0 +1,106 @@
+#include "ros/ros.h"
+
+#include <qbluetoothdeviceinfo.h>
+#include <qbluetoothlocaldevice.h>
+
+#include <QCoreApplication>
+#include <QDebug>
+#include <QtCore/QObject>
+#include <QtCore/QList>
+
+#include "btserver.h"
+
+class BtServer;
+
+class BtRosInterface :
+: QObject
+{
+  Q_OBJECT
+
+public:
+  ros::NodeHandle nh_;
+  
+  BtRosInterface(QObject *parent) : QObject(parent);
+
+signals:
+    void sendMessage(const QString &message);
+
+private slots:
+  void showMessage(const QString &sender, const QString &message);
+
+  void clientConnected(const QString &name)
+  {
+    qDebug() << "clientConnected! :D";
+  }
+
+  void clientDisconnected(const QString &name)
+  {
+    qDebug() << "clientDisconnected! :D";
+  }
+
+  void clientDisconnected()
+  {
+    ChatClient *client = qobject_cast<ChatClient *>(sender());
+    if (client) {
+        clients.removeOne(client);
+        client->deleteLater();
+    }
+  }
+
+  void connected(const QString &name)
+  {
+    qDebug() << "connected! :D";
+  }
+}
+// End class BtRosInterface definition/implementation.
+
+
+
+void setupServer()
+{
+  QBluetoothLocalDevice localDevice;
+  QString localDeviceName;
+  QBluetoothAddress localDeviceAddress;
+
+  if(localDevice.isValid())
+  {
+
+    server = new ChatServer(this);
+    connect(server, SIGNAL(clientConnected(QString)), this, SLOT(clientConnected(QString)));
+    connect(server, SIGNAL(clientDisconnected(QString)), this, SLOT(clientDisconnected(QString)));
+    connect(server, SIGNAL(messageReceived(QString,QString)),
+            this, SLOT(showMessage(QString,QString)));
+    connect(this, SIGNAL(sendMessage(QString)), server, SLOT(sendMessage(QString)));
+    server->startServer();
+
+    qDebug() << localDeviceName;
+    localDevice.powerOn();
+
+    localDeviceName = localDevice.name();
+    localDeviceAddress= localDevice.address();
+
+    localDevice.setHostMode(QBluetoothLocalDevice::HostDiscoverable);
+
+    QList<QBluetoothAddress> remotes;
+    remotes = localDevice.connectedDevices();
+
+    qDebug() << localDeviceName;
+    qDebug() << localDeviceAddress.toString();
+  }
+}
+
+int main(int argc, char *argv[])
+{
+  QCoreApplication app(argc, argv);
+
+
+  qDebug() << "Heiiii! :D";
+
+  
+
+  setupServer();
+
+  app.exec();
+
+  return 0;
+}
