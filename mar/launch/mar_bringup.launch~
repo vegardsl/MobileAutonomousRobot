@@ -16,7 +16,7 @@
   type="hokuyo_node">
 </node>
 
-<node name="image_throttler" type="throttle" pkg="topic_tools" args="messages /openni/rgb/image_raw 10 /image_raw_throttled" 
+<node name="video_throttler" type="throttle" pkg="topic_tools" args="messages /openni/rgb/image_raw 10 /image_raw_throttled" 
 />
 
 <node if="$(arg remote)"
@@ -34,6 +34,10 @@
   <node name="robot_state_publisher" 
          pkg="robot_state_publisher" 
         type="state_publisher" />
+
+  <node name="mar_transform_broadcaster"
+         pkg="mobile_platform"
+        type="mar_transform_broadcaster" />
 
   <node name="keyboard_publisher"
          pkg="mobile_platform"

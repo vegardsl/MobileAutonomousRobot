@@ -366,9 +366,9 @@
      <torque>20</torque>
      <topicName>cmd_vel</topicName>
      <commandTopic>cmd_vel_ramped</commandTopic>
-     <broadcastTF>true</broadcastTF>
+     <broadcastTF>false</broadcastTF>
      <odometryTopic>sim_odom</odometryTopic>
-     <odometryFrame>sim_odom</odometryFrame>
+     <odometryFrame>odom</odometryFrame>
    </plugin>
  </gazebo>
 

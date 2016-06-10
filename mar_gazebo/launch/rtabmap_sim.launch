@@ -33,15 +33,15 @@
     <param name="scan_topic" value="/mar/laser/scan"/>
   </node>
 
-  <node name="image_compressor" 
+  <!--node name="image_compressor" 
         type="republish" 
         pkg="compressed_image_transport" 
-        args="raw in:=/camera/rgb/image_raw compressed out:= /camera/rgb/image_raw/compressed" />
+        args="raw in:=/camera/rgb/image_raw compressed out:= /camera/rgb/image_raw/compressed" /-->
 
-  <node name="depth_compressosr" 
+  <!--node name="depth_compressor" 
         type="republish" 
         pkg="compressed_depth_image_transport" 
-        args="raw in:=/camera/depth/image_raw compressed out:= /camera/depth/image_raw/compressedDepth" />
+        args="raw in:=/camera/depth/image_raw compressed out:= /camera/depth/image_raw/compressedDepth" /-->
 
   <!-- ******************************* -->
   <!-- ******  RTABMAP LAUNCH ******** -->
@@ -111,7 +111,7 @@
          <remap from="obstacles" to="/planner_cloud"/>
 
          <param name="frame_id" type="string" value="base_link"/>
-         <!--param name="map_frame_id" type="string" value="hector_map"/-->
+         <param name="map_frame_id" type="string" value="hector_map"/>
          <param name="min_cluster_size" type="int" value="20"/>
          <param name="max_obstacles_height" type="double" value="0.0"/>
        </node>

@@ -35,6 +35,10 @@
          pkg="robot_state_publisher" 
         type="state_publisher" />
 
+  <node name="state_publisher"
+         pkg="mobile_platform"
+        type="state_publisher" />
+
   <node name="keyboard_publisher"
          pkg="mobile_platform"
         type="keyboard_publisher" />

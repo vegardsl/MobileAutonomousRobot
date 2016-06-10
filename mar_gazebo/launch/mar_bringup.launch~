@@ -7,12 +7,9 @@
   <!-- ******  SIMULATOR LAUNCH ****** -->
   <!-- ******************************* -->
 
-  <node pkg="tf" type="static_transform_publisher" name="scanmatcher_to_base_link" 
-    args="0.0 0.0 0.0 0.0 0.0 0.0 /scanmatcher_frame /base_link 100" />
-
   <param name="robot_description" command="cat $(find mar_description)/urdf/mar_model_sim.urdf" />
 
-  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
 
   <node name="keyboard_publisher"
          pkg="mobile_platform"
@@ -60,5 +57,4 @@
      type="web_video_server"
      args="http://192.168.0.110:8080/stream?topic=/image_raw_throttled&amp;quality=50&amp;width=320&amp;height=240">
 </node>
-
 </launch>

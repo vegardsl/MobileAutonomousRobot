@@ -129,7 +129,7 @@
   <joint name="base_to_drive_compartment" type="fixed">	
     <parent link="base_link"/>
     <child link="drive_compartment"/>
-    <origin xyz="0 0 -0.0025"/>
+    <origin xyz="0.03 0 -0.0025"/>
   </joint>
 
 <!-- WHEEL LINKS -->
@@ -366,7 +366,7 @@
      <torque>20</torque>
      <topicName>cmd_vel</topicName>
      <commandTopic>cmd_vel_ramped</commandTopic>
-     <broadcastTF>true</broadcastTF>
+     <broadcastTF>false</broadcastTF>
      <odometryTopic>sim_odom</odometryTopic>
      <odometryFrame>odom</odometryFrame>
    </plugin>
