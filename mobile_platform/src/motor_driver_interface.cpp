@@ -250,6 +250,14 @@ std::string IntToString(int val)
 }
 
 
+/**
+* Functions: "int set_interface_attribs(int, int, int)" and 
+* "void set_blocking (int, int)" are direct copies from: 
+* http://stackoverflow.com/questions/6947413/how-to-open-read-and-write-from-serial-port-in-c
+* Username: wallyk, Posted: Aug 4 '11 at 19:54, Edited: May 5 '14 at 20:19
+*
+* Accesed for this project in march 2016.
+*/
 
 int
 set_interface_attribs (int fd, int speed, int parity)

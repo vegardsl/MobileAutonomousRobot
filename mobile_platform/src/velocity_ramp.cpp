@@ -1,3 +1,16 @@
+/**
+* Code in this file is based on 
+* Example 8-5. "keys_to_twist_with_ramps.py" 
+* in the book
+* "Programming Robots with ROS"
+* By: Morgan Quigley; Brian Gerkey; William D. Smart
+* Publisher: O'Reilly Media, Inc.
+* Pub. Date: December 2, 2015
+* Print ISBN-13: 978-1-4493-2389-9
+*
+* Translated to C++ and adapted to fit this project.
+*/
+
 #include "ros/ros.h"
 #include "geometry_msgs/Twist.h"
 

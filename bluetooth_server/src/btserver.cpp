@@ -2,6 +2,13 @@
 
 #include <QCoreApplication>
 
+/**
+* Bluetooth related code is copied from
+* http://doc.qt.io/qt-5/qtbluetooth-btchat-example.html
+* and adapted to fit this application.
+*
+*/
+
 QBluetoothLocalDevice localDevice;
 QString localDeviceName;
 QBluetoothAddress localDeviceAddress;

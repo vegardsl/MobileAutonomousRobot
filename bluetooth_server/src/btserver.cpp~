@@ -120,7 +120,7 @@ void BtServer::clientDisconnected()
 
     socket->deleteLater();
 
-  // BT-connection is lost. Set cmd_vel to zero.
+  // BT-connection is lost. Set cmd_vel_bt to zero.
   cmd_vel_msg.linear.x = 0;
   cmd_vel_msg.angular.z = 0;
   cmd_vel_bt.publish(cmd_vel_msg);
